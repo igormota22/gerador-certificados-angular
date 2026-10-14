@@ -1,0 +1,330 @@
+<main class="min-h-screen overflow-hidden bg-[#FAF8F2] text-[#334155]">
+
+    <!-- Navegação -->
+    <header class="border-b border-[#E8E0D0] bg-[#FAF8F2]">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-12">
+
+            <a routerLink="/" class="flex items-center gap-3">
+                <div class="flex h-11 w-11 items-center justify-center border border-[#B89A5A] text-[#172554]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.4"
+                        stroke="currentColor" class="h-6 w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M7 3.75h7.5L19 8.25v12H7a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2Z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 4v5h5M9 13h6M9 16h6" />
+                    </svg>
+                </div>
+
+                <div>
+                    <span class="block text-xl font-semibold tracking-tight text-[#172554]">
+                        Certifica+
+                    </span>
+                    <span class="text-[9px] uppercase tracking-[0.25em] text-[#8B7650]">
+                        Gestão de certificados
+                    </span>
+                </div>
+            </a>
+
+            <nav class="flex items-center gap-5 sm:gap-8">
+                <a href="#sobre" class="hidden text-sm transition hover:text-[#B89A5A] sm:block">
+                    Sobre a plataforma
+                </a>
+
+                <a routerLink="/login" class="text-sm font-medium text-[#172554] transition hover:text-[#B89A5A]">
+                    Entrar
+                </a>
+
+                <a routerLink="/cadastro"
+                    class="border border-[#172554] bg-[#172554] px-4 py-3 text-xs font-semibold tracking-wide text-white transition hover:border-[#B89A5A] hover:bg-[#B89A5A] sm:px-6">
+                    Criar conta
+                </a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- Abertura editorial -->
+    <section class="mx-auto grid max-w-7xl items-center gap-16 px-6 py-20 lg:grid-cols-12 lg:gap-10 lg:px-12 lg:py-28">
+
+        <div class="relative z-10 lg:col-span-7">
+
+            <div class="mb-8 flex items-center gap-3">
+                <span class="h-px w-10 bg-[#B89A5A]"></span>
+                <span class="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#8B7650]">
+                    Educação · Reconhecimento · Gestão
+                </span>
+            </div>
+
+            <h1
+                class="max-w-3xl font-serif text-5xl leading-[1.12] tracking-tight text-[#172554] sm:text-6xl lg:text-7xl">
+                Cada conquista
+                <span class="block italic text-[#8B7650]">
+                    merece ser
+                </span>
+                reconhecida.
+            </h1>
+
+            <p class="mt-8 max-w-xl text-base leading-8 text-[#647084] sm:text-lg">
+                Uma maneira mais organizada de gerenciar cursos, emitir certificados
+                e acompanhar cada etapa do processo, do cadastro à entrega.
+            </p>
+
+            <div class="mt-10 flex flex-wrap items-center gap-5">
+                <a routerLink="/auth/cadastro"
+                    class="inline-flex items-center gap-3 bg-[#172554] px-7 py-4 text-sm font-medium text-white transition hover:bg-[#263B70]">
+                    Começar agora
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="h-4 w-4">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M4.5 12h15m-6.75-6.75L19.5 12l-6.75 6.75" />
+                    </svg>
+                </a>
+
+                <a href="#sobre"
+                    class="border-b border-[#B89A5A] pb-1 text-sm font-medium text-[#172554] transition hover:text-[#8B7650]">
+                    Conhecer a plataforma
+                </a>
+            </div>
+
+            <div class="mt-16 flex items-center gap-5 border-t border-[#E8E0D0] pt-6">
+                <span class="font-serif text-3xl text-[#B89A5A]">01</span>
+                <p class="max-w-xs text-xs leading-6 text-[#647084]">
+                    Menos tarefas manuais. Mais clareza no acompanhamento de cada certificado.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- Certificado como peça central da composição -->
+        <div class="relative mx-auto w-full max-w-md lg:col-span-5">
+
+            <!-- Elemento decorativo de fundo -->
+            <div class="absolute -right-5 -top-5 h-28 w-28 border-r border-t border-[#B89A5A] sm:-right-8 sm:-top-8">
+            </div>
+            <div
+                class="absolute -bottom-5 -left-5 h-28 w-28 border-b border-l border-[#B89A5A] sm:-bottom-8 sm:-left-8">
+            </div>
+
+            <!-- Folha do certificado -->
+            <div class="relative bg-white p-3 shadow-[0_24px_70px_rgba(23,37,84,0.10)] sm:p-5">
+
+                <div class="border border-[#D8C69E] p-6 sm:p-9">
+
+                    <div class="flex items-center justify-center gap-3">
+                        <span class="h-px w-8 bg-[#B89A5A]"></span>
+                        <span class="text-[9px] uppercase tracking-[0.25em] text-[#8B7650]">
+                            Certifica+
+                        </span>
+                        <span class="h-px w-8 bg-[#B89A5A]"></span>
+                    </div>
+
+                    <div
+                        class="mx-auto mt-7 flex h-14 w-14 items-center justify-center rounded-full border border-[#D8C69E] text-[#B89A5A]">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2"
+                            stroke="currentColor" class="h-8 w-8">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 3.5 14.5 5l3-.2.7 2.9 2.3 1.9-1.2 2.8.5 3-2.8 1.2-1.5 2.6-3-.7-3 .7-1.5-2.6-2.8-1.2.5-3-1.2-2.8 2.3-1.9.7-2.9 3 .2L12 3.5Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m9 12 2 2 4-4" />
+                        </svg>
+                    </div>
+
+                    <p class="mt-7 text-center text-[9px] uppercase tracking-[0.3em] text-[#8B7650]">
+                        Documento de reconhecimento
+                    </p>
+
+                    <h2 class="mt-4 text-center font-serif text-3xl leading-tight text-[#172554] sm:text-4xl">
+                        Certificado
+                        <span class="block italic">de conclusão</span>
+                    </h2>
+
+                    <p class="mt-6 text-center text-xs leading-6 text-[#647084]">
+                        Certificamos que
+                    </p>
+
+                    <p class="mt-2 text-center font-serif text-xl italic text-[#172554]">
+                        Nome do participante
+                    </p>
+
+                    <div class="mx-auto mt-3 h-px w-4/5 bg-[#E8E0D0]"></div>
+
+                    <p class="mx-auto mt-5 max-w-xs text-center text-[11px] leading-6 text-[#647084]">
+                        Concluiu com êxito o curso de formação, cumprindo os requisitos
+                        estabelecidos para sua certificação.
+                    </p>
+
+                    <div class="mt-8 grid grid-cols-2 items-end gap-5">
+
+                        <div class="text-center">
+                            <div class="mx-auto mb-2 h-px w-full bg-[#D8C69E]"></div>
+                            <span class="text-[9px] text-[#647084]">Data de conclusão</span>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="mx-auto mb-2 h-px w-full bg-[#D8C69E]"></div>
+                            <span class="text-[9px] text-[#647084]">Instituição</span>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-7 flex justify-center">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#B89A5A]">
+                            <div class="flex h-9 w-9 items-center justify-center rounded-full border border-[#D8C69E]">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
+                                    stroke="currentColor" class="h-5 w-5 text-[#B89A5A]">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 3v18m-5-15h10M7 18h10M8 6l-2 3h4L8 6Zm8 0-2 3h4l-2-3Z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Legenda lateral -->
+            <div class="mt-7 flex items-start gap-4">
+                <span class="mt-2 h-px w-8 shrink-0 bg-[#B89A5A]"></span>
+                <div>
+                    <p class="text-xs font-semibold tracking-wide text-[#172554]">
+                        Reconhecimento que permanece
+                    </p>
+                    <p class="mt-1 text-xs leading-5 text-[#647084]">
+                        Um exemplo visual do documento que a plataforma ajuda a gerar.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Faixa editorial -->
+    <section class="border-y border-[#E8E0D0] bg-white">
+        <div class="mx-auto grid max-w-7xl gap-8 px-6 py-9 sm:grid-cols-3 sm:gap-10 lg:px-12">
+
+            <div class="flex items-start gap-4">
+                <span class="font-serif text-2xl text-[#B89A5A]">I.</span>
+                <div>
+                    <h3 class="text-sm font-semibold text-[#172554]">Cursos organizados</h3>
+                    <p class="mt-2 text-xs leading-5 text-[#647084]">
+                        Centralize informações sobre cursos e suas conclusões.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+                <span class="font-serif text-2xl text-[#B89A5A]">II.</span>
+                <div>
+                    <h3 class="text-sm font-semibold text-[#172554]">Emissão de certificados</h3>
+                    <p class="mt-2 text-xs leading-5 text-[#647084]">
+                        Organize a geração dos documentos dos participantes.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+                <span class="font-serif text-2xl text-[#B89A5A]">III.</span>
+                <div>
+                    <h3 class="text-sm font-semibold text-[#172554]">Acompanhamento</h3>
+                    <p class="mt-2 text-xs leading-5 text-[#647084]">
+                        Consulte o andamento das solicitações e dos arquivos gerados.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Sobre a plataforma -->
+    <section id="sobre" class="mx-auto grid max-w-7xl gap-10 px-6 py-20 lg:grid-cols-12 lg:gap-16 lg:px-12 lg:py-28">
+
+        <div class="lg:col-span-4">
+            <span class="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#8B7650]">
+                A plataforma
+            </span>
+
+            <h2 class="mt-5 font-serif text-4xl leading-tight text-[#172554] sm:text-5xl">
+                Simplicidade em cada etapa.
+            </h2>
+        </div>
+
+        <div class="lg:col-span-7 lg:col-start-6">
+            <p class="text-base leading-8 text-[#647084]">
+                Gerenciar certificados não precisa significar lidar com processos
+                dispersos e tarefas repetitivas. O Certifica+ reúne recursos para
+                organizar as informações e tornar o fluxo de emissão mais claro.
+            </p>
+
+            <p class="mt-5 text-base leading-8 text-[#647084]">
+                Da preparação dos dados à geração dos documentos, a proposta é
+                facilitar a rotina de quem administra cursos e precisa acompanhar
+                suas certificações.
+            </p>
+
+            <div class="mt-8 border-l-2 border-[#B89A5A] pl-5">
+                <p class="font-serif text-xl italic leading-8 text-[#172554]">
+                    Mais organização para quem ensina.
+                    Mais reconhecimento para quem aprende.
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- Chamada final -->
+    <section class="bg-[#172554]">
+        <div
+            class="mx-auto flex max-w-7xl flex-col justify-between gap-8 px-6 py-16 sm:flex-row sm:items-center lg:px-12 lg:py-20">
+
+            <div class="max-w-2xl">
+                <span class="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#D8C69E]">
+                    Comece por aqui
+                </span>
+
+                <h2 class="mt-4 font-serif text-3xl leading-tight text-white sm:text-4xl">
+                    Organize seus cursos.
+                    <span class="italic text-[#D8C69E]">Valorize cada conquista.</span>
+                </h2>
+
+                <p class="mt-4 text-sm leading-7 text-slate-300">
+                    Crie sua conta e conheça uma nova maneira de gerenciar certificados.
+                </p>
+            </div>
+
+            <a routerLink="/cadastro"
+                class="inline-flex shrink-0 items-center justify-center gap-3 self-start border border-[#B89A5A] px-7 py-4 text-sm font-medium text-white transition hover:bg-[#B89A5A] sm:self-auto">
+                Criar minha conta
+                <span aria-hidden="true">→</span>
+            </a>
+
+        </div>
+    </section>
+
+
+    <!-- Rodapé -->
+    <footer class="bg-[#FAF8F2]">
+        <div
+            class="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-7 sm:flex-row sm:items-center sm:justify-between lg:px-12">
+
+            <div class="flex items-center gap-3">
+                <span class="font-serif text-lg font-semibold text-[#172554]">
+                    Certifica+
+                </span>
+                <span class="h-4 w-px bg-[#D8C69E]"></span>
+                <span class="text-xs text-[#647084]">
+                    Gestão de certificados
+                </span>
+            </div>
+
+            <p class="text-xs text-[#647084]">
+                © 2026 Certifica+. Projeto de desenvolvimento de software.
+            </p>
+
+        </div>
+    </footer>
+
+</main>
