@@ -14,6 +14,20 @@
         <!-- Formulário -->
         <form (ngSubmit)="enviarFormulario()" class="space-y-5">
 
+            @if (erroApi(); as mensagem) {
+            <div class="flex items-start gap-3 rounded-xl border border-red-200
+               bg-red-50 px-4 py-3 text-sm text-red-800 shadow-sm" role="alert">
+                <i class="bi bi-exclamation-circle-fill mt-0.5 text-base text-red-600"></i>
+
+                <div class="flex-1">
+                    <p class="font-semibold">Não foi possível continuar</p>
+                    <p class="mt-1 leading-relaxed text-red-700">
+                        {{ mensagem }}
+                    </p>
+                </div>
+            </div>
+            }
+
             <!-- E-mail -->
             <div>
                 <label for="email" class="mb-2 block text-sm font-medium text-[#172554]">

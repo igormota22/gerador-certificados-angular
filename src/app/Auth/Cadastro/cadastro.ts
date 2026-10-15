@@ -36,10 +36,12 @@ export class Cadastro {
 
     protected erroSenha = signal<string | null>(null);
     protected erroEmail = signal<string | null>(null);
+    protected erroApi = signal<string | null>(null);
 
     enviarFormulario(): void {
         this.erroEmail.set(null);
         this.erroSenha.set(null);
+        this.erroApi.set(null);
 
         this.authService.cadastrar(this.form).subscribe({
             next: (resposta) => {
@@ -54,6 +56,14 @@ export class Cadastro {
 
                 this.erroEmail.set(problema.errors?.['Email']?.[0] ?? null);
                 this.erroSenha.set(problema.errors?.['Senha']?.[0] ?? null);
+
+                if (erro.status === 0) {
+                    this.erroApi.set(problema.detail ?? 'Não foi possivel fazer conexão com a API.');
+                } else if (erro.status === 409) {
+                    this.erroApi.set(problema.detail ?? 'Já existe um usúario com esse email');
+                } else if (!this.erroEmail() && !this.erroSenha()) {
+                    this.erroApi.set(problema.detail ?? 'Ocorreu um erro ao tentar fazer o cadastro. Tente novamente.');
+                }
 
             }
         });

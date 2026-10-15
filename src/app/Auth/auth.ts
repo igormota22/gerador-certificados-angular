@@ -27,6 +27,7 @@ export interface UsuarioResponse {
 export interface ProblemDetails {
     title?: string;
     status?: number;
+    detail?: string;
     type?: string;
     traceId?: string;
     errors?: Record<string, string[]>;

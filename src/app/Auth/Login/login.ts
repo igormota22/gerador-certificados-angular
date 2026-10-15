@@ -37,10 +37,12 @@ export class Login {
 
     protected erroSenha = signal<string | null>(null);
     protected erroEmail = signal<string | null>(null);
+    protected erroApi = signal<string | null>(null);
 
     enviarFormulario(): void {
         this.erroEmail.set(null);
         this.erroSenha.set(null);
+        this.erroApi.set(null);
 
         this.authService.login(this.form).subscribe({
             next: () => {
@@ -56,6 +58,14 @@ export class Login {
                 this.erroSenha.set(
                     problema.errors?.['Senha']?.[0] ?? null
                 );
+
+                if (erro.status === 0) {
+                    this.erroApi.set(problema.detail ?? 'Não foi possivel fazer conexão com a API.');
+                } else if (erro.status === 401) {
+                    this.erroApi.set(problema.detail ?? 'E-mail ou senha inválidos.');
+                } else if (!this.erroEmail() && !this.erroSenha()) {
+                    this.erroApi.set(problema.detail ?? 'Ocorreu um erro ao tentar fazer o login. Tente novamente.');
+                }
             }
         });
     }
