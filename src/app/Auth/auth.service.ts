@@ -8,15 +8,48 @@ import {
     CadastrarUsuarioResponse,
     UsuarioResponse
 } from './auth';
-import { URL_API } from './auth.tokens';
+import { TOKEN_ARMAZENADO, URL_API } from './auth.tokens';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
 
+    constructor() {
+        const autenticacaoArmazenada =
+            localStorage.getItem(this.token);
+
+        if (!autenticacaoArmazenada) {
+            return;
+        }
+
+        try {
+            const autenticacao: AutenticarUsuarioResponse =
+                JSON.parse(autenticacaoArmazenada);
+
+
+            if (!this.autenticacaoEstaValida(autenticacao)) {
+                this.sair();
+                return;
+            }
+
+            this._autenticacao.set(autenticacao);
+        } catch {
+            localStorage.removeItem(this.token);
+        }
+    }
+
+    //==============================================
+    //INJEÇAO DE DEPENDENCIA
+    //===============================================
+
     private readonly http = inject(HttpClient);
     private readonly urlApi = inject(URL_API);
+    private readonly token = inject(TOKEN_ARMAZENADO);
+
+    //===============================================
+    //ESTADOS
+    //===============================================
 
     private readonly _usuarioAutenticado =
         signal<UsuarioResponse | null>(null);
@@ -29,6 +62,9 @@ export class AuthService {
 
     readonly autenticacao = this._autenticacao.asReadonly();
 
+    //================================================
+    //METODOS
+    //================================================
 
     cadastrar(
         req: CadastrarUsuarioRequest
@@ -52,6 +88,7 @@ export class AuthService {
     }
 
     sair(): void {
+        localStorage.removeItem(this.token);
         this._autenticacao.set(null);
         this._usuarioAutenticado.set(null);
     }
@@ -81,7 +118,26 @@ export class AuthService {
         resposta: AutenticarUsuarioResponse
     ): void {
         this._usuarioAutenticado.set(null);
+
+        localStorage.setItem(
+            this.token,
+            JSON.stringify(resposta)
+        );
+
         this._autenticacao.set(resposta);
+    }
+
+    private autenticacaoEstaValida(
+        autenticacao: AutenticarUsuarioResponse
+    ): boolean {
+        const dataExpiracao = new Date(
+            autenticacao.dataExpiracaoEmUtc
+        ).getTime();
+
+        return (
+            Number.isFinite(dataExpiracao) &&
+            dataExpiracao > Date.now()
+        );
     }
 
 

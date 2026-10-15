@@ -2,7 +2,7 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
-import { URL_API } from './Auth/auth.tokens';
+import { TOKEN_ARMAZENADO, URL_API } from './Auth/auth.tokens';
 import { environment } from '../enviroments/enviroment.develpoment';
 
 export const appConfig: ApplicationConfig = {
@@ -13,6 +13,10 @@ export const appConfig: ApplicationConfig = {
     {
       provide: URL_API,
       useValue: environment.urlApi,
+    },
+    {
+      provide: TOKEN_ARMAZENADO,
+      useValue: 'Certifica+_Acesso'
     },
   ]
 };
