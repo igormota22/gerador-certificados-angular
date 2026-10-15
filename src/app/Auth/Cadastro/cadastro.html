@@ -12,7 +12,7 @@
         </div>
 
         <!-- Formulário -->
-        <form class="space-y-5">
+        <form (ngSubmit)="enviarFormulario()" class="space-y-5">
 
             <!-- E-mail -->
             <div>
@@ -20,8 +20,16 @@
                     E-mail
                 </label>
 
-                <input id="email" name="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required
+                <input id="email" name="email" type="email" [(ngModel)]="form.email" autocomplete="email"
+                    placeholder="voce@exemplo.com" required
                     class="w-full border border-[#E8E0D0] bg-white px-4 py-3.5 text-sm text-[#334155] outline-none transition placeholder:text-slate-400 hover:border-[#B89A5A] focus:border-[#B89A5A] focus:ring-1 focus:ring-[#B89A5A]" />
+
+                @if (erroEmail()) {
+                <p class="mt-2 text-sm text-red-600">
+                    {{ erroEmail() }}
+                </p>
+                }
+
             </div>
 
             <!-- Senha -->
@@ -30,9 +38,15 @@
                     Senha
                 </label>
 
-                <input id="senha" name="senha" type="password" autocomplete="new-password" placeholder="Crie uma senha"
-                    required
+                <input id="senha" name="senha" type="password" [(ngModel)]="form.senha" autocomplete="new-password"
+                    placeholder="Crie uma senha" required
                     class="w-full border border-[#E8E0D0] bg-white px-4 py-3.5 text-sm text-[#334155] outline-none transition placeholder:text-slate-400 hover:border-[#B89A5A] focus:border-[#B89A5A] focus:ring-1 focus:ring-[#B89A5A]" />
+
+                @if (erroSenha()) {
+                <p class="mt-2 text-sm text-red-600">
+                    {{ erroSenha() }}
+                </p>
+                }
 
                 <p class="mt-2 text-xs leading-5 text-[#647084]">
                     Utilize uma senha que atenda aos requisitos de segurança da plataforma.

@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
+import { Home } from './Components/Home/home';
 
 export const routes: Routes = [
     {
-        path: '',
+        path: 'home',
         loadComponent: () => import('./Components/Home/home').then((c) => c.Home)
     },
     {
@@ -12,5 +13,9 @@ export const routes: Routes = [
     {
         path: 'login',
         loadComponent: () => import('./Auth/Login/login').then((c) => c.Login)
+    },
+    {
+        path: '',
+        component: Home
     }
 ];

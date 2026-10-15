@@ -1,3 +1,394 @@
+@if (authService.usuarioAutenticado(); as usuario) {
+<!-- ============================================ -->
+<!-- ÁREA AUTENTICADA — PAINEL DE GESTÃO -->
+<!-- ============================================ -->
+
+<main class="min-h-screen bg-[#F5F3ED] text-[#334155]">
+
+    <!-- Cabeçalho -->
+    <header class="sticky top-0 z-30 border-b border-[#E8E0D0] bg-[#FAF8F2]">
+        <div class="mx-auto flex max-w-[1600px] items-center justify-between px-5 py-4 sm:px-8">
+
+            <a routerLink="/" class="flex items-center gap-3">
+                <div class="flex h-11 w-11 items-center justify-center bg-[#172554] text-[#D8C69E]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.4"
+                        stroke="currentColor" class="h-6 w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M7 3.75h7.5L19 8.25v12H7a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2Z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 4v5h5M9 13h6M9 16h6" />
+                    </svg>
+                </div>
+
+                <div>
+                    <span class="block text-xl font-semibold tracking-tight text-[#172554]">
+                        Certifica+
+                    </span>
+                    <span class="text-[9px] uppercase tracking-[0.25em] text-[#8B7650]">
+                        Gestão de certificados
+                    </span>
+                </div>
+            </a>
+
+            <div class="flex items-center gap-4 sm:gap-6">
+                <div class="hidden text-right sm:block">
+                    <p class="text-xs text-[#8B7650]">Conta conectada</p>
+                    <p class="mt-1 max-w-56 truncate text-sm font-medium text-[#172554]">
+                        {{ usuario.email }}
+                    </p>
+                </div>
+
+                <div
+                    class="flex h-10 w-10 items-center justify-center border border-[#D8C69E] bg-white text-sm font-semibold text-[#172554]">
+                    {{ usuario.email.charAt(0).toUpperCase() }}
+                </div>
+
+                <button type="button" (click)="sair()"
+                    class="border border-[#E8E0D0] px-3 py-2 text-xs font-medium text-[#172554] transition hover:border-[#B89A5A] hover:text-[#8B7650] sm:px-4 sm:text-sm">
+                    Sair
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+
+    <div class="mx-auto grid max-w-[1600px] lg:grid-cols-[250px_minmax(0,1fr)]">
+
+        <!-- Navegação lateral -->
+        <aside
+            class="border-b border-[#E8E0D0] bg-[#FAF8F2] p-5 sm:p-7 lg:min-h-[calc(100vh-73px)] lg:border-b-0 lg:border-r">
+
+            <p class="mb-4 px-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#8B7650]">
+                Menu principal
+            </p>
+
+            <nav class="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-1">
+
+                <a routerLink="/" class="flex items-center gap-3 bg-[#172554] px-3 py-3 text-sm font-medium text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="h-5 w-5 shrink-0 text-[#D8C69E]">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m3.75 10.5 8.25-7 8.25 7M5.25 9.25v10a1 1 0 0 0 1 1h11.5a1 1 0 0 0 1-1v-10M9 20.25v-6h6v6" />
+                    </svg>
+                    Visão geral
+                </a>
+
+                <a routerLink="/cursos"
+                    class="flex items-center gap-3 px-3 py-3 text-sm transition hover:bg-[#EEE8D9] hover:text-[#172554]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="h-5 w-5 shrink-0 text-[#8B7650]">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 6.25c-2-1.5-4.5-2-8-1.5v13c3.5-.5 6 0 8 1.5m0-13c2-1.5 4.5-2 8-1.5v13c-3.5-.5-6 0-8 1.5m0-13v13" />
+                    </svg>
+                    Cursos
+                </a>
+
+                <a routerLink="/solicitar-certificado"
+                    class="flex items-center gap-3 px-3 py-3 text-sm transition hover:bg-[#EEE8D9] hover:text-[#172554]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="h-5 w-5 shrink-0 text-[#8B7650]">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M8 4.75h8m-8 4h8m-8 4h5m-7.25-12h14.5a1 1 0 0 1 1 1v17a1 1 0 0 1-1 1H5.75a1 1 0 0 1-1-1v-17a1 1 0 0 1 1-1Z" />
+                    </svg>
+                    Solicitar certificados
+                </a>
+
+                <a routerLink="/certificados"
+                    class="flex items-center gap-3 px-3 py-3 text-sm transition hover:bg-[#EEE8D9] hover:text-[#172554]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="h-5 w-5 shrink-0 text-[#8B7650]">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M7 3.75h7.5L19 8.25v12H7a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2Z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 4v5h5m-9 4h5m-5 3h5m-5 3h3" />
+                    </svg>
+                    Certificados
+                </a>
+
+            </nav>
+
+            <div class="mt-8 hidden border-t border-[#E8E0D0] pt-6 lg:block">
+                <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#8B7650]">
+                    Sua plataforma
+                </p>
+                <p class="mt-3 text-xs leading-6 text-[#647084]">
+                    Organize cursos, acompanhe solicitações e mantenha os certificados gerados em um só lugar.
+                </p>
+            </div>
+
+            <div class="mt-6 hidden border border-[#E8E0D0] bg-white p-4 lg:block">
+                <div class="flex items-center gap-2">
+                    <span class="h-2 w-2 rounded-full bg-[#B89A5A]"></span>
+                    <span class="text-xs font-medium text-[#172554]">
+                        Conta autenticada
+                    </span>
+                </div>
+                <p class="mt-2 break-all text-[11px] leading-5 text-[#647084]">
+                    {{ usuario.email }}
+                </p>
+            </div>
+
+        </aside>
+
+
+        <!-- Conteúdo principal -->
+        <section class="min-w-0 px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-12">
+
+            <!-- Apresentação -->
+            <div class="relative overflow-hidden bg-[#172554] p-7 sm:p-10 lg:p-12">
+
+                <div
+                    class="pointer-events-none absolute -right-12 -top-16 h-64 w-64 rounded-full border border-[#D8C69E]/20">
+                </div>
+                <div
+                    class="pointer-events-none absolute -right-2 -top-6 h-44 w-44 rounded-full border border-[#D8C69E]/20">
+                </div>
+
+                <div class="relative z-10 max-w-3xl">
+
+                    <div class="mb-6 flex items-center gap-3">
+                        <span class="h-px w-8 bg-[#D8C69E]"></span>
+                        <span class="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#D8C69E]">
+                            Painel de gestão
+                        </span>
+                    </div>
+
+                    <h1 class="font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
+                        Bem-vindo ao
+                        <span class="italic text-[#D8C69E]">Certifica+.</span>
+                    </h1>
+
+                    <p class="mt-5 max-w-xl text-sm leading-7 text-slate-300 sm:text-base">
+                        Sua área de gestão está pronta. Acesse seus cursos, inicie uma solicitação de certificados
+                        ou consulte os documentos que já foram gerados.
+                    </p>
+
+                    <div class="mt-8">
+                        <a routerLink="/solicitar-certificado"
+                            class="inline-flex items-center gap-3 bg-[#D8C69E] px-6 py-4 text-sm font-semibold text-[#172554] transition hover:bg-white">
+                            Solicitar certificados
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Título dos acessos -->
+            <div class="mb-6 mt-12 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+                <div>
+                    <span class="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#8B7650]">
+                        Acesso rápido
+                    </span>
+                    <h2 class="mt-2 font-serif text-3xl text-[#172554]">
+                        O que deseja fazer?
+                    </h2>
+                </div>
+
+                <p class="max-w-md text-sm leading-6 text-[#647084]">
+                    Escolha uma funcionalidade para continuar sua rotina de gestão.
+                </p>
+            </div>
+
+
+            <!-- Cartões de funcionalidades -->
+            <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+
+                <!-- Cursos -->
+                <a routerLink="/cursos"
+                    class="group flex min-h-64 flex-col border border-[#E8E0D0] bg-[#FAF8F2] p-6 transition hover:-translate-y-1 hover:border-[#B89A5A] hover:shadow-[0_12px_30px_rgba(23,37,84,0.07)] sm:p-7">
+
+                    <div class="flex items-start justify-between">
+                        <div
+                            class="flex h-12 w-12 items-center justify-center bg-[#EDE7D9] text-[#8B7650] transition group-hover:bg-[#172554] group-hover:text-[#D8C69E]">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.4"
+                                stroke="currentColor" class="h-6 w-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 6.25c-2-1.5-4.5-2-8-1.5v13c3.5-.5 6 0 8 1.5m0-13c2-1.5 4.5-2 8-1.5v13c-3.5-.5-6 0-8 1.5m0-13v13" />
+                            </svg>
+                        </div>
+
+                        <span class="text-xl text-[#B89A5A] transition group-hover:translate-x-1">
+                            →
+                        </span>
+                    </div>
+
+                    <h3 class="mt-7 font-serif text-2xl text-[#172554]">
+                        Cursos
+                    </h3>
+
+                    <p class="mt-3 flex-1 text-sm leading-6 text-[#647084]">
+                        Cadastre novos cursos e consulte as informações dos cursos disponíveis para certificação.
+                    </p>
+
+                    <span
+                        class="mt-6 border-t border-[#E8E0D0] pt-4 text-xs font-semibold uppercase tracking-[0.12em] text-[#8B7650]">
+                        Gerenciar cursos
+                    </span>
+
+                </a>
+
+
+                <!-- Solicitações -->
+                <a routerLink="/solicitar-certificado"
+                    class="group flex min-h-64 flex-col border border-[#E8E0D0] bg-[#FAF8F2] p-6 transition hover:-translate-y-1 hover:border-[#B89A5A] hover:shadow-[0_12px_30px_rgba(23,37,84,0.07)] sm:p-7">
+
+                    <div class="flex items-start justify-between">
+                        <div
+                            class="flex h-12 w-12 items-center justify-center bg-[#EDE7D9] text-[#8B7650] transition group-hover:bg-[#172554] group-hover:text-[#D8C69E]">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.4"
+                                stroke="currentColor" class="h-6 w-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M8 4.75h8m-8 4h8m-8 4h5m-7.25-12h14.5a1 1 0 0 1 1 1v17a1 1 0 0 1-1 1H5.75a1 1 0 0 1-1-1v-17a1 1 0 0 1 1-1Z" />
+                            </svg>
+                        </div>
+
+                        <span class="text-xl text-[#B89A5A] transition group-hover:translate-x-1">
+                            →
+                        </span>
+                    </div>
+
+                    <h3 class="mt-7 font-serif text-2xl text-[#172554]">
+                        Solicitar certificados
+                    </h3>
+
+                    <p class="mt-3 flex-1 text-sm leading-6 text-[#647084]">
+                        Selecione um curso, informe os participantes e inicie a geração dos certificados.
+                    </p>
+
+                    <span
+                        class="mt-6 border-t border-[#E8E0D0] pt-4 text-xs font-semibold uppercase tracking-[0.12em] text-[#8B7650]">
+                        Nova solicitação
+                    </span>
+
+                </a>
+
+
+                <!-- Certificados -->
+                <a routerLink="/certificados"
+                    class="group flex min-h-64 flex-col border border-[#E8E0D0] bg-[#FAF8F2] p-6 transition hover:-translate-y-1 hover:border-[#B89A5A] hover:shadow-[0_12px_30px_rgba(23,37,84,0.07)] sm:p-7 md:col-span-2 xl:col-span-1">
+
+                    <div class="flex items-start justify-between">
+                        <div
+                            class="flex h-12 w-12 items-center justify-center bg-[#EDE7D9] text-[#8B7650] transition group-hover:bg-[#172554] group-hover:text-[#D8C69E]">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.4"
+                                stroke="currentColor" class="h-6 w-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M7 3.75h7.5L19 8.25v12H7a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M14 4v5h5m-9 4h5m-5 3h5m-5 3h3" />
+                            </svg>
+                        </div>
+
+                        <span class="text-xl text-[#B89A5A] transition group-hover:translate-x-1">
+                            →
+                        </span>
+                    </div>
+
+                    <h3 class="mt-7 font-serif text-2xl text-[#172554]">
+                        Certificados
+                    </h3>
+
+                    <p class="mt-3 flex-1 text-sm leading-6 text-[#647084]">
+                        Consulte as solicitações, acompanhe o processamento e acesse os arquivos disponíveis para
+                        download.
+                    </p>
+
+                    <span
+                        class="mt-6 border-t border-[#E8E0D0] pt-4 text-xs font-semibold uppercase tracking-[0.12em] text-[#8B7650]">
+                        Consultar e baixar
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <!-- Orientação -->
+            <section class="mt-12 border border-[#E8E0D0] bg-white">
+
+                <div class="border-b border-[#E8E0D0] px-6 py-5 sm:px-8">
+                    <span class="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#8B7650]">
+                        Fluxo de trabalho
+                    </span>
+                    <h2 class="mt-2 font-serif text-2xl text-[#172554]">
+                        Do curso ao certificado
+                    </h2>
+                </div>
+
+                <div class="grid gap-0 sm:grid-cols-3">
+
+                    <div class="border-b border-[#E8E0D0] p-6 sm:border-b-0 sm:border-r sm:p-7">
+                        <span class="font-serif text-3xl text-[#B89A5A]">01</span>
+                        <h3 class="mt-4 text-sm font-semibold text-[#172554]">
+                            Organize os cursos
+                        </h3>
+                        <p class="mt-2 text-xs leading-6 text-[#647084]">
+                            Mantenha os dados dos cursos cadastrados para utilizar nas solicitações.
+                        </p>
+                        <a routerLink="/cursos"
+                            class="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-[#8B7650] hover:text-[#172554]">
+                            Acessar cursos
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    </div>
+
+                    <div class="border-b border-[#E8E0D0] p-6 sm:border-b-0 sm:border-r sm:p-7">
+                        <span class="font-serif text-3xl text-[#B89A5A]">02</span>
+                        <h3 class="mt-4 text-sm font-semibold text-[#172554]">
+                            Faça uma solicitação
+                        </h3>
+                        <p class="mt-2 text-xs leading-6 text-[#647084]">
+                            Informe o curso e os participantes que receberão os certificados.
+                        </p>
+                        <a routerLink="/solicitar-certificado"
+                            class="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-[#8B7650] hover:text-[#172554]">
+                            Iniciar solicitação
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    </div>
+
+                    <div class="p-6 sm:p-7">
+                        <span class="font-serif text-3xl text-[#B89A5A]">03</span>
+                        <h3 class="mt-4 text-sm font-semibold text-[#172554]">
+                            Consulte os arquivos
+                        </h3>
+                        <p class="mt-2 text-xs leading-6 text-[#647084]">
+                            Acompanhe o resultado do processamento e baixe os certificados disponíveis.
+                        </p>
+                        <a routerLink="/certificados"
+                            class="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-[#8B7650] hover:text-[#172554]">
+                            Ver certificados
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- Rodapé do painel -->
+            <footer
+                class="mt-10 flex flex-col gap-3 border-t border-[#E8E0D0] pt-6 sm:flex-row sm:items-center sm:justify-between">
+                <p class="text-xs text-[#647084]">
+                    © 2026 Certifica+. Gestão de certificados.
+                </p>
+                <p class="text-xs text-[#8B7650]">
+                    Organização em cada etapa. Reconhecimento em cada conquista.
+                </p>
+            </footer>
+
+        </section>
+
+    </div>
+
+</main>
+
+} @else {
+<!-- ============================================ -->
+<!-- ÁREA PÚBLICA — PÁGINA INSTITUCIONAL -->
+<!-- ============================================ -->
+
 <main class="min-h-screen overflow-hidden bg-[#FAF8F2] text-[#334155]">
 
     <!-- Navegação -->
@@ -70,7 +461,7 @@
             </p>
 
             <div class="mt-10 flex flex-wrap items-center gap-5">
-                <a routerLink="/auth/cadastro"
+                <a routerLink="/cadastro"
                     class="inline-flex items-center gap-3 bg-[#172554] px-7 py-4 text-sm font-medium text-white transition hover:bg-[#263B70]">
                     Começar agora
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -96,17 +487,15 @@
         </div>
 
 
-        <!-- Certificado como peça central da composição -->
+        <!-- Certificado ilustrativo -->
         <div class="relative mx-auto w-full max-w-md lg:col-span-5">
 
-            <!-- Elemento decorativo de fundo -->
             <div class="absolute -right-5 -top-5 h-28 w-28 border-r border-t border-[#B89A5A] sm:-right-8 sm:-top-8">
             </div>
             <div
                 class="absolute -bottom-5 -left-5 h-28 w-28 border-b border-l border-[#B89A5A] sm:-bottom-8 sm:-left-8">
             </div>
 
-            <!-- Folha do certificado -->
             <div class="relative bg-white p-3 shadow-[0_24px_70px_rgba(23,37,84,0.10)] sm:p-5">
 
                 <div class="border border-[#D8C69E] p-6 sm:p-9">
@@ -154,7 +543,6 @@
                     </p>
 
                     <div class="mt-8 grid grid-cols-2 items-end gap-5">
-
                         <div class="text-center">
                             <div class="mx-auto mb-2 h-px w-full bg-[#D8C69E]"></div>
                             <span class="text-[9px] text-[#647084]">Data de conclusão</span>
@@ -164,7 +552,6 @@
                             <div class="mx-auto mb-2 h-px w-full bg-[#D8C69E]"></div>
                             <span class="text-[9px] text-[#647084]">Instituição</span>
                         </div>
-
                     </div>
 
                     <div class="mt-7 flex justify-center">
@@ -182,7 +569,6 @@
                 </div>
             </div>
 
-            <!-- Legenda lateral -->
             <div class="mt-7 flex items-start gap-4">
                 <span class="mt-2 h-px w-8 shrink-0 bg-[#B89A5A]"></span>
                 <div>
@@ -200,7 +586,7 @@
     </section>
 
 
-    <!-- Faixa editorial -->
+    <!-- Faixa de funcionalidades -->
     <section class="border-y border-[#E8E0D0] bg-white">
         <div class="mx-auto grid max-w-7xl gap-8 px-6 py-9 sm:grid-cols-3 sm:gap-10 lg:px-12">
 
@@ -328,3 +714,4 @@
     </footer>
 
 </main>
+}
