@@ -13,6 +13,8 @@ import { TOKEN_ARMAZENADO, URL_API } from './auth.tokens';
 @Injectable({
     providedIn: 'root'
 })
+
+
 export class AuthService {
 
     constructor() {
@@ -61,6 +63,7 @@ export class AuthService {
         signal<AutenticarUsuarioResponse | null>(null);
 
     readonly autenticacao = this._autenticacao.asReadonly();
+
 
     //================================================
     //METODOS
