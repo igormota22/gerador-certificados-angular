@@ -1,0 +1,137 @@
+<div class="min-h-screen bg-[#f4f6fb] text-[#101b36]">
+
+    <!-- Layout principal -->
+    <div class="flex min-h-screen">
+
+        <!-- Menu lateral -->
+        <aside class="fixed inset-y-0 left-0 z-40 flex w-64 flex-col
+                   border-r border-slate-200 bg-white">
+
+            <a routerLink="/curso/listagem">Listagem de cursos</a>
+
+            <a routerLink="/curso/cadastro">Cadastrar curso</a>
+
+            <!-- Logo -->
+            <div class="flex h-20 items-center gap-3 border-b border-slate-100 px-6">
+                <div class="flex h-11 w-11 items-center justify-center
+                           rounded-xl bg-[#101b36] text-[#B89A5A]">
+                    <i class="bi bi-mortarboard-fill text-2xl"></i>
+                </div>
+
+                <div>
+                    <h1 class="text-lg font-bold tracking-tight">
+                        Certifica<span class="text-[#B89A5A]">+</span>
+                    </h1>
+                    <p class="text-xs text-slate-500">
+                        Gestão de certificados
+                    </p>
+                </div>
+            </div>
+
+            <!-- Navegação -->
+            <nav class="flex-1 space-y-2 px-4 py-6">
+
+                <p class="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-slate-400">
+                    Menu principal
+                </p>
+
+                <a routerLink="/home" routerLinkActive="bg-[#101b36] text-white shadow-sm"
+                    [routerLinkActiveOptions]="{ exact: true }" class="flex items-center gap-3 rounded-xl px-4 py-3
+                           text-sm font-medium text-slate-600
+                           transition hover:bg-slate-100">
+                    <i class="bi bi-grid-1x2 text-lg"></i>
+                    Início
+                </a>
+
+                <a routerLink="/cursos" routerLinkActive="bg-[#101b36] text-white shadow-sm" class="flex items-center gap-3 rounded-xl px-4 py-3
+                           text-sm font-medium text-slate-600
+                           transition hover:bg-slate-100">
+                    <i class="bi bi-journal-bookmark text-lg"></i>
+                    Cursos
+                </a>
+
+                <a routerLink="/solicitar-certificado" routerLinkActive="bg-[#101b36] text-white shadow-sm" class="flex items-center gap-3 rounded-xl px-4 py-3
+                           text-sm font-medium text-slate-600
+                           transition hover:bg-slate-100">
+                    <i class="bi bi-file-earmark-plus text-lg"></i>
+                    Solicitar certificados
+                </a>
+
+                <a routerLink="/certificados" routerLinkActive="bg-[#101b36] text-white shadow-sm" class="flex items-center gap-3 rounded-xl px-4 py-3
+                           text-sm font-medium text-slate-600
+                           transition hover:bg-slate-100">
+                    <i class="bi bi-file-earmark-check text-lg"></i>
+                    Certificados
+                </a>
+            </nav>
+
+            <!-- Rodapé do menu -->
+            <div class="border-t border-slate-100 p-4">
+                <div class="flex items-center gap-3 rounded-xl bg-[#f4f6fb] p-3">
+                    <div class="flex h-10 w-10 items-center justify-center
+                               rounded-full bg-[#101b36] text-[#B89A5A]">
+                        <i class="bi bi-person-fill text-xl"></i>
+                    </div>
+
+                    <div class="min-w-0 flex-1">
+                        <p class="truncate text-sm font-semibold">
+                            Minha conta
+                        </p>
+                        <p class="text-xs text-slate-500">
+                            Área do usuário
+                        </p>
+                    </div>
+
+                    <i class="bi bi-shield-check text-lg text-emerald-600"></i>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Área de conteúdo -->
+        <div class="ml-64 flex min-h-screen min-w-0 flex-1 flex-col">
+
+            <!-- Cabeçalho -->
+            <header class="sticky top-0 z-30 flex h-20 items-center justify-between
+                       border-b border-slate-200 bg-white/95 px-8 backdrop-blur">
+
+                <div>
+                    <p class="text-xs font-medium uppercase tracking-wider text-slate-400">
+                        Certifica+ / Gestão
+                    </p>
+
+                    <h2 class="mt-1 text-lg font-bold">
+                        Gerenciamento de cursos
+                    </h2>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <span class="hidden text-sm text-slate-500 sm:block">
+                        Plataforma de certificados
+                    </span>
+
+                    <div class="flex h-10 w-10 items-center justify-center
+                               rounded-xl border border-slate-200 bg-white">
+                        <i class="bi bi-mortarboard text-xl text-[#B89A5A]"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Conteúdo da página filha -->
+            <main class="flex-1 p-6 md:p-8">
+                <div class="mx-auto w-full max-w-7xl">
+
+                    <router-outlet></router-outlet>
+
+                </div>
+            </main>
+
+            <!-- Rodapé -->
+            <footer class="border-t border-slate-200 bg-white px-8 py-4">
+                <p class="text-center text-xs text-slate-400">
+                    Certifica+ © 2026 · Gerenciamento de certificados
+                </p>
+            </footer>
+
+        </div>
+    </div>
+</div>
