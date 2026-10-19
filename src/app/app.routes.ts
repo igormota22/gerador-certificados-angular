@@ -1,25 +1,29 @@
 import { Routes } from '@angular/router';
-import { Home } from './Components/Home/home';
 
 export const routes: Routes = [
     {
-        path: 'home',
-        loadComponent: () => import('./Components/Home/home').then((c) => c.Home)
-    },
-    {
         path: 'cadastro',
-        loadComponent: () => import('./Auth/Cadastro/cadastro').then((c) => c.Cadastro)
+        loadComponent: () =>
+            import('./Auth/Cadastro/cadastro')
+                .then(m => m.Cadastro)
     },
     {
         path: 'login',
-        loadComponent: () => import('./Auth/Login/login').then((c) => c.Login)
+        loadComponent: () =>
+            import('./Auth/Login/login')
+                .then(m => m.Login)
+    },
+    {
+        path: 'home',
+        loadComponent: () =>
+            import('./Components/Home/home')
+                .then(m => m.Home)
     },
     {
         path: 'curso',
         loadComponent: () =>
             import('./Components/Cursos/Shell/curso-shell')
                 .then(m => m.CursoShell),
-
         children: [
             {
                 path: '',
@@ -48,6 +52,7 @@ export const routes: Routes = [
     },
     {
         path: '',
-        component: Home
+        pathMatch: 'full',
+        redirectTo: 'home'
     }
 ];

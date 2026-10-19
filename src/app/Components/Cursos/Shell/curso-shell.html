@@ -1,134 +1,168 @@
-<div class="min-h-screen bg-[#f4f6fb] text-[#101b36]">
+<div class="min-h-screen bg-[#FAF8F2] text-[#334155]">
 
-    <!-- Layout principal -->
     <div class="flex min-h-screen">
 
         <!-- Menu lateral -->
-        <aside class="fixed inset-y-0 left-0 z-40 flex w-64 flex-col
-                   border-r border-slate-200 bg-white">
+        <aside class="fixed inset-y-0 left-0 z-40 flex w-64 flex-col border-r border-[#E8E0D0] bg-white">
 
-            <a routerLink="/curso/listagem">Listagem de cursos</a>
+            <!-- Marca -->
+            <a routerLink="/curso/listagem"
+                class="flex h-20 shrink-0 items-center gap-3 border-b border-[#E8E0D0] px-6 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#B89A5A]">
 
-            <a routerLink="/curso/cadastro">Cadastrar curso</a>
+                <span
+                    class="grid h-11 w-11 shrink-0 place-items-center border border-[#B89A5A] bg-[#172554] text-[#D8C69E]">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"
+                        aria-hidden="true">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+                        <path d="M14 2v6h6" />
+                        <path d="M8 13h8M8 17h8M8 9h2" />
+                    </svg>
+                </span>
 
-            <!-- Logo -->
-            <div class="flex h-20 items-center gap-3 border-b border-slate-100 px-6">
-                <div class="flex h-11 w-11 items-center justify-center
-                           rounded-xl bg-[#101b36] text-[#B89A5A]">
-                    <i class="bi bi-mortarboard-fill text-2xl"></i>
-                </div>
-
-                <div>
-                    <h1 class="text-lg font-bold tracking-tight">
+                <span>
+                    <span class="block text-lg font-semibold tracking-tight text-[#172554]">
                         Certifica<span class="text-[#B89A5A]">+</span>
-                    </h1>
-                    <p class="text-xs text-slate-500">
+                    </span>
+                    <span class="mt-0.5 block text-xs text-[#647084]">
                         Gestão de certificados
-                    </p>
-                </div>
-            </div>
+                    </span>
+                </span>
+            </a>
 
             <!-- Navegação -->
-            <nav class="flex-1 space-y-2 px-4 py-6">
+            <nav class="flex-1 space-y-2 px-4 py-7">
 
-                <p class="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <p class="mb-4 px-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#8B7650]">
                     Menu principal
                 </p>
 
-                <a routerLink="/home" routerLinkActive="bg-[#101b36] text-white shadow-sm"
-                    [routerLinkActiveOptions]="{ exact: true }" class="flex items-center gap-3 rounded-xl px-4 py-3
-                           text-sm font-medium text-slate-600
-                           transition hover:bg-slate-100">
-                    <i class="bi bi-grid-1x2 text-lg"></i>
+                <!-- Início -->
+                <a routerLink="/home" routerLinkActive="border-[#B89A5A] bg-[#172554] text-white"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    class="flex items-center gap-3 border-l-2 border-transparent px-4 py-3 text-sm font-medium text-[#647084] transition-colors hover:border-[#B89A5A]/60 hover:bg-[#FAF8F2] hover:text-[#172554]">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 shrink-0"
+                        aria-hidden="true">
+                        <rect x="3" y="3" width="7" height="7" rx="1" />
+                        <rect x="14" y="3" width="7" height="7" rx="1" />
+                        <rect x="14" y="14" width="7" height="7" rx="1" />
+                        <rect x="3" y="14" width="7" height="7" rx="1" />
+                    </svg>
+
                     Início
                 </a>
 
-                <a routerLink="/cursos" routerLinkActive="bg-[#101b36] text-white shadow-sm" class="flex items-center gap-3 rounded-xl px-4 py-3
-                           text-sm font-medium text-slate-600
-                           transition hover:bg-slate-100">
-                    <i class="bi bi-journal-bookmark text-lg"></i>
+                <!-- Listagem -->
+                <a routerLink="/curso/listagem" routerLinkActive="border-[#B89A5A] bg-[#172554] text-white"
+                    class="flex items-center gap-3 border-l-2 border-transparent px-4 py-3 text-sm font-medium text-[#647084] transition-colors hover:border-[#B89A5A]/60 hover:bg-[#FAF8F2] hover:text-[#172554]">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 shrink-0"
+                        aria-hidden="true">
+                        <path d="M4 4h16v16H4z" />
+                        <path d="M8 8h8M8 12h8M8 16h5" />
+                    </svg>
+
                     Cursos
                 </a>
 
-                <a routerLink="/solicitar-certificado" routerLinkActive="bg-[#101b36] text-white shadow-sm" class="flex items-center gap-3 rounded-xl px-4 py-3
-                           text-sm font-medium text-slate-600
-                           transition hover:bg-slate-100">
-                    <i class="bi bi-file-earmark-plus text-lg"></i>
-                    Solicitar certificados
-                </a>
+                <!-- Cadastro -->
+                <a routerLink="/curso/cadastro" routerLinkActive="border-[#B89A5A] bg-[#172554] text-white"
+                    class="flex items-center gap-3 border-l-2 border-transparent px-4 py-3 text-sm font-medium text-[#647084] transition-colors hover:border-[#B89A5A]/60 hover:bg-[#FAF8F2] hover:text-[#172554]">
 
-                <a routerLink="/certificados" routerLinkActive="bg-[#101b36] text-white shadow-sm" class="flex items-center gap-3 rounded-xl px-4 py-3
-                           text-sm font-medium text-slate-600
-                           transition hover:bg-slate-100">
-                    <i class="bi bi-file-earmark-check text-lg"></i>
-                    Certificados
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 shrink-0"
+                        aria-hidden="true">
+                        <path d="M12 5v14M5 12h14" />
+                    </svg>
+
+                    Cadastrar curso
                 </a>
             </nav>
 
-            <!-- Rodapé do menu -->
-            <div class="border-t border-slate-100 p-4">
-                <div class="flex items-center gap-3 rounded-xl bg-[#f4f6fb] p-3">
-                    <div class="flex h-10 w-10 items-center justify-center
-                               rounded-full bg-[#101b36] text-[#B89A5A]">
-                        <i class="bi bi-person-fill text-xl"></i>
-                    </div>
+            <!-- Identificação do usuário -->
+            <div class="shrink-0 border-t border-[#E8E0D0] p-4">
+                <div class="flex items-center gap-3 border border-[#E8E0D0] bg-[#FAF8F2] p-3">
 
-                    <div class="min-w-0 flex-1">
-                        <p class="truncate text-sm font-semibold">
+                    <span
+                        class="grid h-10 w-10 shrink-0 place-items-center border border-[#B89A5A]/50 bg-[#172554] text-[#D8C69E]">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"
+                            aria-hidden="true">
+                            <circle cx="12" cy="8" r="4" />
+                            <path d="M5 21v-2a7 7 0 0 1 14 0v2" />
+                        </svg>
+                    </span>
+
+                    <span class="min-w-0 flex-1">
+                        <span class="block truncate text-sm font-semibold text-[#172554]">
                             Minha conta
-                        </p>
-                        <p class="text-xs text-slate-500">
+                        </span>
+                        <span class="mt-0.5 block text-xs text-[#647084]">
                             Área do usuário
-                        </p>
-                    </div>
+                        </span>
+                    </span>
 
-                    <i class="bi bi-shield-check text-lg text-emerald-600"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                        class="h-5 w-5 shrink-0 text-[#8B7650]" aria-hidden="true">
+                        <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z" />
+                        <path d="m9 12 2 2 4-4" />
+                    </svg>
                 </div>
             </div>
         </aside>
 
-        <!-- Área de conteúdo -->
+        <!-- Área principal -->
         <div class="ml-64 flex min-h-screen min-w-0 flex-1 flex-col">
 
             <!-- Cabeçalho -->
-            <header class="sticky top-0 z-30 flex h-20 items-center justify-between
-                       border-b border-slate-200 bg-white/95 px-8 backdrop-blur">
+            <header
+                class="sticky top-0 z-30 flex h-20 shrink-0 items-center justify-between border-b border-[#E8E0D0] bg-[#FAF8F2]/95 px-8 backdrop-blur">
 
                 <div>
-                    <p class="text-xs font-medium uppercase tracking-wider text-slate-400">
-                        Certifica+ / Gestão
-                    </p>
+                    <div class="flex items-center gap-2">
+                        <span class="h-px w-6 bg-[#B89A5A]"></span>
+                        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#8B7650]">
+                            Certifica+ · Gestão
+                        </p>
+                    </div>
 
-                    <h2 class="mt-1 text-lg font-bold">
+                    <h2 class="mt-1.5 font-serif text-xl font-semibold tracking-tight text-[#172554]">
                         Gerenciamento de cursos
                     </h2>
                 </div>
 
-                <div class="flex items-center gap-3">
-                    <span class="hidden text-sm text-slate-500 sm:block">
-                        Plataforma de certificados
+                <div class="hidden items-center gap-3 sm:flex">
+                    <span class="text-xs text-[#647084]">
+                        Educação · Reconhecimento · Gestão
                     </span>
 
-                    <div class="flex h-10 w-10 items-center justify-center
-                               rounded-xl border border-slate-200 bg-white">
-                        <i class="bi bi-mortarboard text-xl text-[#B89A5A]"></i>
-                    </div>
+                    <span class="grid h-10 w-10 place-items-center border border-[#E8E0D0] bg-white text-[#B89A5A]">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"
+                            aria-hidden="true">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+                            <path d="M14 2v6h6" />
+                            <path d="M8 13h8M8 17h5" />
+                        </svg>
+                    </span>
                 </div>
             </header>
 
-            <!-- Conteúdo da página filha -->
-            <main class="flex-1 p-6 md:p-8">
+            <!-- Conteúdo das rotas filhas -->
+            <main class="flex-1 px-5 py-7 sm:px-8 sm:py-9">
                 <div class="mx-auto w-full max-w-7xl">
-
                     <router-outlet></router-outlet>
-
                 </div>
             </main>
 
             <!-- Rodapé -->
-            <footer class="border-t border-slate-200 bg-white px-8 py-4">
-                <p class="text-center text-xs text-slate-400">
-                    Certifica+ © 2026 · Gerenciamento de certificados
+            <footer class="border-t border-[#E8E0D0] bg-white px-8 py-5">
+                <p class="text-center text-xs leading-6 text-[#647084]">
+                    © 2026 Certifica+. Gestão de certificados.
                 </p>
             </footer>
 

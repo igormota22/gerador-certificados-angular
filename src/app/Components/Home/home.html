@@ -73,13 +73,16 @@
                     Visão geral
                 </a>
 
-                <a routerLink="/cursos"
-                    class="flex items-center gap-3 px-3 py-3 text-sm transition hover:bg-[#EEE8D9] hover:text-[#172554]">
+                <a routerLink="/curso/listagem" routerLinkActive="bg-[#EEE8D9] text-[#172554]" class="flex items-center gap-3 px-3 py-3 text-sm transition
+           hover:bg-[#EEE8D9] hover:text-[#172554]">
+
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="h-5 w-5 shrink-0 text-[#8B7650]">
+
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M12 6.25c-2-1.5-4.5-2-8-1.5v13c3.5-.5 6 0 8 1.5m0-13c2-1.5 4.5-2 8-1.5v13c-3.5-.5-6 0-8 1.5m0-13v13" />
                     </svg>
+
                     Cursos
                 </a>
 
@@ -195,7 +198,7 @@
             <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
 
                 <!-- Cursos -->
-                <a routerLink="/cursos"
+                <a routerLink="/curso/listagem"
                     class="group flex min-h-64 flex-col border border-[#E8E0D0] bg-[#FAF8F2] p-6 transition hover:-translate-y-1 hover:border-[#B89A5A] hover:shadow-[0_12px_30px_rgba(23,37,84,0.07)] sm:p-7">
 
                     <div class="flex items-start justify-between">
