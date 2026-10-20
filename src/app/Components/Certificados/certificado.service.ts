@@ -40,4 +40,12 @@ export class CertificadoService {
             `${this.urlApi}/cursos/${cursoId}/status`
         );
     }
+    baixarZip(cursoId: string) {
+        return this.http.get(
+            `${this.urlApi}/cursos/${cursoId}/certificados/download`,
+            {
+                responseType: 'blob'
+            }
+        );
+    }
 }

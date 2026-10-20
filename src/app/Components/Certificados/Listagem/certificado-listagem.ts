@@ -234,4 +234,33 @@ export class CertificadoListagem implements OnInit, OnDestroy {
         this.acompanhamento?.unsubscribe();
         this.acompanhamento = undefined;
     }
+
+    //=======================================================
+    // DOWNLOAD
+    //=======================================================
+    baixarZip(): void {
+        const cursoId = this.cursoSelecionado();
+
+        if (!cursoId) {
+            return;
+        }
+
+        this.certificadoService.baixarZip(cursoId).subscribe({
+            next: arquivo => {
+                const url = URL.createObjectURL(arquivo);
+
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'certificados.zip';
+                link.click();
+
+                URL.revokeObjectURL(url);
+            },
+            error: () => {
+                this.mensagemErro.set(
+                    'Não foi possível baixar o arquivo ZIP.'
+                );
+            }
+        });
+    }
 }

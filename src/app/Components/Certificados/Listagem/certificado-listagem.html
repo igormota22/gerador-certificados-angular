@@ -293,14 +293,8 @@
                 </p>
             </div>
 
-            <button type="button" disabled title="O download ainda precisa ser conectado ao serviço"
-                class="inline-flex cursor-not-allowed items-center justify-center gap-2 rounded-xl bg-[#172554] px-5 py-3 text-sm font-semibold text-white opacity-50">
-
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <path d="m7 10 5 5 5-5M12 15V3" />
-                </svg>
+            <button type="button" (click)="baixarZip()" [disabled]="!cursoSelecionado() || totalGerados() === 0"
+                class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#172554] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#B89A5A] disabled:cursor-not-allowed disabled:opacity-50">
 
                 Baixar arquivos ZIP
             </button>
