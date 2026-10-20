@@ -40,4 +40,10 @@ export class CursoService {
 
 
     }
+
+    obterPorId(cursoId: string): Observable<CursoResponse> {
+        return this.http.get<CursoResponse>(
+            `${this.urlApi}/Api/cursos/${cursoId}`
+        );
+    }
 }
