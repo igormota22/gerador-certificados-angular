@@ -1,8 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { URL_API } from "../../Auth/auth.tokens";
-import { CursoResponse } from "./curso";
+import { CadastrarCursoRequest, CadastrarCursoResponse, CursoResponse } from "./curso";
 import { Observable } from "rxjs";
+import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -16,6 +17,7 @@ export class CursoService {
 
     private readonly http = inject(HttpClient);
     private readonly urlApi = inject(URL_API);
+    private readonly router = inject(Router);
 
     //=======================================
     // METODOS
@@ -25,4 +27,17 @@ export class CursoService {
         return this.http.get<CursoResponse[]>(`${this.urlApi}/Api/cursos`);
     }
 
+    cadastrar(curso: CadastrarCursoRequest) {
+        const request: CadastrarCursoRequest = {
+            ...curso,
+            dataConclusao: `${curso.dataConclusao}T00:00:00Z`
+        };
+
+        return this.http.post<CadastrarCursoResponse>(
+            `${this.urlApi}/Api/cursos`,
+            request
+        );
+
+
+    }
 }

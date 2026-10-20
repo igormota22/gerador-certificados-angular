@@ -1,0 +1,103 @@
+<div class="mx-auto w-full max-w-3xl">
+    <div class="mb-8">
+        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#8B7650]">
+            Gestão acadêmica
+        </p>
+
+        <h1 class="font-serif text-3xl font-semibold text-[#172554]">
+            Cadastrar curso
+        </h1>
+
+        <p class="mt-2 text-sm leading-6 text-[#647084]">
+            Preencha as informações para adicionar um novo curso.
+        </p>
+    </div>
+
+    <form (submit)="enviarFormulario($event)"
+        class="space-y-6 rounded-2xl border border-[#E8E0D0] bg-white p-6 shadow-sm sm:p-8">
+        @if (mensagemErro(); as erro) {
+        <div role="alert" class="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+            {{ erro }}
+        </div>
+        }
+
+        <div>
+            <label for="nome" class="mb-2 block text-sm font-medium text-[#172554]">
+                Nome do curso *
+            </label>
+
+            <input id="nome" type="text" [formField]="formulario.nome" placeholder="Ex.: Desenvolvimento Web"
+                class="w-full rounded-lg border border-[#E8E0D0] bg-[#FAF8F2] px-4 py-3 text-sm text-[#334155] outline-none transition focus:border-[#B89A5A] focus:ring-2 focus:ring-[#B89A5A]/20" />
+
+            @if (formulario.nome().touched() && formulario.nome().invalid()) {
+            @for (erro of formulario.nome().errors(); track erro) {
+            <p class="mt-1 text-sm text-red-600">
+                {{ erro.message }}
+            </p>
+            }
+            }
+        </div>
+
+        <div>
+            <label for="descricao" class="mb-2 block text-sm font-medium text-[#172554]">
+                Descrição
+            </label>
+
+            <textarea id="descricao" [formField]="formulario.descricao" rows="4"
+                placeholder="Descreva o conteúdo do curso (opcional)"
+                class="w-full resize-y rounded-lg border border-[#E8E0D0] bg-[#FAF8F2] px-4 py-3 text-sm text-[#334155] outline-none transition focus:border-[#B89A5A] focus:ring-2 focus:ring-[#B89A5A]/20"></textarea>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2">
+            <div>
+                <label for="cargaHoraria" class="mb-2 block text-sm font-medium text-[#172554]">
+                    Carga horária (horas) *
+                </label>
+
+                <input id="cargaHoraria" type="number" [formField]="formulario.cargaHoraria"
+                    class="w-full rounded-lg border border-[#E8E0D0] bg-[#FAF8F2] px-4 py-3 text-sm text-[#334155] outline-none transition focus:border-[#B89A5A] focus:ring-2 focus:ring-[#B89A5A]/20" />
+
+                @if (formulario.cargaHoraria().touched() && formulario.cargaHoraria().invalid()) {
+                @for (erro of formulario.cargaHoraria().errors(); track erro) {
+                <p class="mt-1 text-sm text-red-600">
+                    {{ erro.message }}
+                </p>
+                }
+                }
+            </div>
+
+            <div>
+                <label for="dataConclusao" class="mb-2 block text-sm font-medium text-[#172554]">
+                    Data de conclusão *
+                </label>
+
+                <input id="dataConclusao" type="date" [formField]="formulario.dataConclusao"
+                    class="w-full rounded-lg border border-[#E8E0D0] bg-[#FAF8F2] px-4 py-3 text-sm text-[#334155] outline-none transition focus:border-[#B89A5A] focus:ring-2 focus:ring-[#B89A5A]/20" />
+
+                @if (formulario.dataConclusao().touched() && formulario.dataConclusao().invalid()) {
+                @for (erro of formulario.dataConclusao().errors(); track erro) {
+                <p class="mt-1 text-sm text-red-600">
+                    {{ erro.message }}
+                </p>
+                }
+                }
+            </div>
+        </div>
+
+        <div class="flex flex-col-reverse gap-3 border-t border-[#E8E0D0] pt-6 sm:flex-row sm:justify-end">
+            <button type="button" (click)="cancelar()"
+                class="rounded-lg border border-[#E8E0D0] px-5 py-3 text-sm font-medium text-[#334155] transition hover:bg-[#FAF8F2]">
+                Cancelar
+            </button>
+
+            <button type="submit" [disabled]="formulario().submitting()"
+                class="rounded-lg bg-[#172554] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#24396B] disabled:cursor-not-allowed disabled:opacity-60">
+                @if (formulario().submitting()) {
+                Cadastrando...
+                } @else {
+                Cadastrar curso
+                }
+            </button>
+        </div>
+    </form>
+</div>
