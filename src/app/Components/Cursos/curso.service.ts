@@ -3,7 +3,6 @@ import { inject, Injectable } from "@angular/core";
 import { URL_API } from "../../Auth/auth.tokens";
 import { CadastrarCursoRequest, CadastrarCursoResponse, CursoResponse } from "./curso";
 import { Observable } from "rxjs";
-import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +16,6 @@ export class CursoService {
 
     private readonly http = inject(HttpClient);
     private readonly urlApi = inject(URL_API);
-    private readonly router = inject(Router);
 
     //=======================================
     // METODOS

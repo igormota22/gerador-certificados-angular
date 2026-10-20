@@ -66,4 +66,10 @@ export class CursoDetalhe implements OnInit {
     cancelar(): void {
         void this.router.navigateByUrl('/curso/listagem');
     }
+
+    copiarId(cursoId: string): void {
+        navigator.clipboard.writeText(cursoId).then(() => {
+            // O ID foi copiado.
+        });
+    }
 }

@@ -51,6 +51,31 @@ export const routes: Routes = [
         ]
     },
     {
+        path: 'certificado',
+        loadComponent: () =>
+            import('./Components/Certificados/Shell/certificado-shell')
+                .then(m => m.CertificadoShell),
+        children: [
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'listagem'
+            },
+            {
+                path: 'listagem',
+                loadComponent: () =>
+                    import('./Components/Certificados/Listagem/certificado-listagem')
+                        .then(m => m.CertificadoListagem)
+            },
+            {
+                path: 'solicitacao',
+                loadComponent: () =>
+                    import('./Components/Certificados/Solicitacao/certificado-solicitacao')
+                        .then(m => m.CertificadoSolicitacao)
+            }
+        ]
+    },
+    {
         path: '',
         pathMatch: 'full',
         redirectTo: 'home'

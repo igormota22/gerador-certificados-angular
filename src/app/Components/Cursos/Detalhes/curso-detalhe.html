@@ -26,6 +26,30 @@
             {{ mensagemErro() }}
         </div>
         } @else if (curso(); as item) {
+
+
+        <!-- ID do curso -->
+        <div class="sm:col-span-2">
+            <div
+                class="flex flex-col gap-2 rounded-xl border border-[#E8E0D0] bg-[#FAF8F2] p-4 sm:flex-row sm:items-center sm:justify-between">
+
+                <div class="min-w-0">
+                    <p class="text-sm font-medium text-slate-500">
+                        Identificador do curso
+                    </p>
+
+                    <p class="mt-1 break-all font-mono text-sm text-[#172554]">
+                        {{ item.id }}
+                    </p>
+                </div>
+
+                <button type="button" (click)="copiarId(item.id)"
+                    class="shrink-0 rounded-lg border border-[#E8E0D0] bg-white px-4 py-2 text-sm font-semibold text-[#172554] transition hover:bg-[#F4F1E8]">
+                    Copiar ID
+                </button>
+
+            </div>
+        </div>
         <div class="grid gap-6 sm:grid-cols-2">
 
             <div class="sm:col-span-2">
