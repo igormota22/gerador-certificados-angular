@@ -63,6 +63,8 @@ export class CertificadoListagem implements OnInit, OnDestroy {
     protected statusSolicitacao =
         signal<StatusSolicitacaoResponse | null>(null);
 
+    protected downloadDisponivel = signal(false);
+
     protected carregandoCursos = signal(false);
     protected carregandoCertificados = signal(false);
 
@@ -136,13 +138,13 @@ export class CertificadoListagem implements OnInit, OnDestroy {
         const select = event.target as HTMLSelectElement;
         const cursoId = select.value;
 
-        // Cancela o acompanhamento do curso anterior.
         this.pararAcompanhamento();
 
         this.cursoSelecionado.set(cursoId);
         this.certificados.set([]);
         this.statusSolicitacao.set(null);
         this.mensagemErro.set(null);
+        this.downloadDisponivel.set(false);
 
         if (!cursoId) {
             this.carregandoCertificados.set(false);
@@ -150,7 +152,12 @@ export class CertificadoListagem implements OnInit, OnDestroy {
         }
 
         this.carregarCertificados(cursoId);
-        this.acompanharProcessamento(cursoId);
+
+        if (
+            this.certificadoService.cursoDaSolicitacaoAtual() === cursoId
+        ) {
+            this.acompanharProcessamento(cursoId);
+        }
     }
 
     //=======================================================
@@ -161,10 +168,25 @@ export class CertificadoListagem implements OnInit, OnDestroy {
 
         this.certificadoService.listar(cursoId).subscribe({
             next: certificados => {
-                this.certificados.set(certificados);
+                const cursoAtual =
+                    this.certificadoService.cursoDaSolicitacaoAtual();
+
+                const solicitacaoId =
+                    this.certificadoService.solicitacaoAtual();
+
+                if (cursoAtual !== cursoId || !solicitacaoId) {
+                    this.certificados.set([]);
+                } else {
+                    const certificadosAtuais = certificados.filter(
+                        certificado =>
+                            certificado.solicitacaoCertificadoId === solicitacaoId
+                    );
+
+                    this.certificados.set(certificadosAtuais);
+                }
+
                 this.carregandoCertificados.set(false);
             },
-
             error: () => {
                 this.mensagemErro.set(
                     'Não foi possível carregar os certificados deste curso.'
@@ -216,11 +238,25 @@ export class CertificadoListagem implements OnInit, OnDestroy {
                     this.statusSolicitacao.set(resposta);
                     this.mensagemErro.set(null);
 
-                    // Ao terminar, atualiza a lista com os resultados finais.
+                    const cursoAtual =
+                        this.certificadoService.cursoDaSolicitacaoAtual();
+
+                    const solicitacaoId =
+                        this.certificadoService.solicitacaoAtual();
+
+                    const solicitacaoAtual =
+                        cursoAtual === cursoId && solicitacaoId !== null;
+
                     if (
-                        resposta.status === StatusProcessamento.Concluido ||
-                        resposta.status === StatusProcessamento.Falha
+                        resposta.status === StatusProcessamento.Concluido &&
+                        solicitacaoAtual
                     ) {
+                        this.downloadDisponivel.set(true);
+                        this.carregarCertificados(cursoId);
+                    }
+
+                    if (resposta.status === StatusProcessamento.Falha) {
+                        this.downloadDisponivel.set(false);
                         this.carregarCertificados(cursoId);
                     }
                 }
@@ -241,7 +277,12 @@ export class CertificadoListagem implements OnInit, OnDestroy {
     baixarZip(): void {
         const cursoId = this.cursoSelecionado();
 
-        if (!cursoId) {
+        if (
+            !cursoId ||
+            !this.downloadDisponivel() ||
+            this.certificadoService.cursoDaSolicitacaoAtual() !== cursoId ||
+            !this.certificadoService.solicitacaoAtual()
+        ) {
             return;
         }
 
@@ -262,5 +303,17 @@ export class CertificadoListagem implements OnInit, OnDestroy {
                 );
             }
         });
+    }
+
+    //=======================================================================
+    //LIMPAR
+    //=======================================================================
+    limparSolicitacoes(): void {
+        this.pararAcompanhamento();
+
+        this.certificados.set([]);
+        this.statusSolicitacao.set(null);
+        this.downloadDisponivel.set(false);
+        this.mensagemErro.set(null);
     }
 }

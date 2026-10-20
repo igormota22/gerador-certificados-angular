@@ -142,6 +142,10 @@ export class CertificadoSolicitacao implements OnInit {
         this.certificadoService.solicitar(cursoId, req).subscribe({
             next: (resposta: SolicitarCertificadosResponse) => {
                 this.enviando.set(false);
+                this.certificadoService.registrarSolicitacaoAtual(
+                    cursoId,
+                    resposta.id
+                );
 
                 this.mensagemSucesso.set(
                     `Solicitação criada com sucesso! Identificador: ${resposta.id}`

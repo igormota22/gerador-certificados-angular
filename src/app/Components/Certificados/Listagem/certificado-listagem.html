@@ -293,10 +293,16 @@
                 </p>
             </div>
 
-            <button type="button" (click)="baixarZip()" [disabled]="!cursoSelecionado() || totalGerados() === 0"
+            <button type="button" (click)="baixarZip()" [disabled]="!downloadDisponivel()"
                 class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#172554] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#B89A5A] disabled:cursor-not-allowed disabled:opacity-50">
 
                 Baixar arquivos ZIP
+            </button>
+
+            <button type="button" (click)="limparSolicitacoes()" [disabled]="!downloadDisponivel()"
+                class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#172554] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#B89A5A] disabled:cursor-not-allowed disabled:opacity-50">
+
+                Limpar
             </button>
         </div>
 
