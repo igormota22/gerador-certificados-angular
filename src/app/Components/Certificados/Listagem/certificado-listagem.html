@@ -46,10 +46,8 @@
             </label>
 
             <select id="curso" name="curso" [value]="cursoSelecionado()" (change)="selecionarCurso($event)"
-                [disabled]="carregandoCursos()" class="w-full rounded-xl border border-[#D8D2C5] bg-white px-4 py-3
-                       text-sm text-[#172554] outline-none transition
-                       focus:border-[#B89A5A] focus:ring-2 focus:ring-[#B89A5A]/20
-                       disabled:cursor-not-allowed disabled:bg-[#F5F3ED]">
+                [disabled]="carregandoCursos()"
+                class="w-full rounded-xl border border-[#D8D2C5] bg-white px-4 py-3 text-sm text-[#172554] outline-none transition focus:border-[#B89A5A] focus:ring-2 focus:ring-[#B89A5A]/20 disabled:cursor-not-allowed disabled:bg-[#F5F3ED]">
 
                 <option value="">
                     {{ carregandoCursos() ? 'Carregando cursos...' : 'Selecione um curso' }}
@@ -115,10 +113,87 @@
     }
 
 
-    <!-- Conteúdo após selecionar um curso -->
-    @if (cursoSelecionado() && !carregandoCertificados() && !mensagemErro()) {
+    <!-- Conteúdo do curso selecionado -->
+    @if (cursoSelecionado() && !carregandoCertificados()) {
 
-    <!-- Resumo dos certificados -->
+    <!-- Status geral do processamento -->
+    @if (statusSolicitacao(); as solicitacao) {
+    <section class="mb-6 rounded-2xl border border-[#E8E0D0] bg-white p-5 shadow-sm sm:p-6">
+
+        <div class="flex items-start gap-4">
+            <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#F5F0E5] text-[#8B7547]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+            </div>
+
+            <div class="min-w-0 flex-1">
+                <h2 class="font-semibold text-[#172554]">
+                    Status do processamento
+                </h2>
+
+                <p class="mt-1 text-sm text-[#647084]">
+                    Acompanhe o andamento da solicitação de certificados.
+                </p>
+
+                <div class="mt-4">
+                    @switch (solicitacao.status) {
+                    @case ('Pendente') {
+                    <span class="inline-flex rounded-full bg-amber-50 px-3 py-1.5 text-xs font-semibold text-amber-800">
+                        Aguardando processamento
+                    </span>
+                    }
+
+                    @case ('GerandoCertificados') {
+                    <span
+                        class="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700">
+                        <span class="h-2 w-2 animate-pulse rounded-full bg-blue-600"></span>
+                        Gerando certificados...
+                    </span>
+                    }
+
+
+
+                    @case ('GerandoZip') {
+                    <span
+                        class="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700">
+                        <span class="h-2 w-2 animate-pulse rounded-full bg-blue-600"></span>
+                        Preparando arquivo ZIP...
+                    </span>
+                    }
+
+
+                    @case ('Concluido') {
+                    <span
+                        class="inline-flex rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700">
+                        Processamento concluído
+                    </span>
+                    }
+
+                    @case ('Falha') {
+                    <span class="inline-flex rounded-full bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-700">
+                        Falha no processamento
+                    </span>
+                    }
+
+                    @default {
+                    <span
+                        class="inline-flex rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-700">
+                        Status desconhecido: {{ solicitacao.status }}
+                    </span>
+                    }
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+    }
+
+
+    <!-- Indicadores -->
+    @if (!mensagemErro()) {
     <section class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
 
         <!-- Total -->
@@ -138,7 +213,7 @@
             </div>
 
             <p class="mt-4 text-3xl font-bold text-[#172554]">
-                {{ certificados().length }}
+                {{ totalCertificados() }}
             </p>
 
             <p class="mt-1 text-xs text-[#647084]">
@@ -165,7 +240,7 @@
             </div>
 
             <p class="mt-4 text-3xl font-bold text-emerald-700">
-                {{ certificados().filter(c => c.status === 0).length }}
+                {{ totalGerados() }}
             </p>
 
             <p class="mt-1 text-xs text-[#647084]">
@@ -174,7 +249,7 @@
         </article>
 
 
-        <!-- Com falha -->
+        <!-- Falhas -->
         <article class="rounded-2xl border border-[#E8E0D0] bg-white p-5 shadow-sm">
             <div class="flex items-center justify-between gap-3">
                 <p class="text-sm font-medium text-[#647084]">
@@ -191,7 +266,7 @@
             </div>
 
             <p class="mt-4 text-3xl font-bold text-red-600">
-                {{ certificados().filter(c => c.status === 1).length }}
+                {{ totalFalhas() }}
             </p>
 
             <p class="mt-1 text-xs text-[#647084]">
@@ -200,9 +275,10 @@
         </article>
 
     </section>
+    }
 
 
-    <!-- Lista de certificados -->
+    <!-- Tabela de certificados -->
     <section class="overflow-hidden rounded-2xl border border-[#E8E0D0] bg-white shadow-sm">
 
         <div
@@ -217,10 +293,8 @@
                 </p>
             </div>
 
-            <!-- Download ZIP: requer integração com o serviço -->
-            <button type="button" disabled
-                class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#172554] px-5 py-3 text-sm font-semibold text-white opacity-50 transition"
-                title="O download ainda precisa ser conectado ao serviço">
+            <button type="button" disabled title="O download ainda precisa ser conectado ao serviço"
+                class="inline-flex cursor-not-allowed items-center justify-center gap-2 rounded-xl bg-[#172554] px-5 py-3 text-sm font-semibold text-white opacity-50">
 
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -233,9 +307,8 @@
         </div>
 
 
-        <!-- Tabela de resultados -->
+        <!-- Existem certificados -->
         @if (certificados().length > 0) {
-
         <div class="overflow-x-auto">
             <table class="w-full text-left text-sm">
                 <thead class="border-b border-[#E8E0D0] bg-[#F5F0E5]">
@@ -266,23 +339,36 @@
                             @if (certificado.dataDeGeracao) {
                             {{ certificado.dataDeGeracao | date:'dd/MM/yyyy' }}
                             } @else {
-                            <span class="text-[#94A3B8]">Não disponível</span>
+                            <span class="text-[#94A3B8]">
+                                Não disponível
+                            </span>
                             }
                         </td>
 
                         <td class="px-5 py-4">
-                            @if (certificado.status === 0) {
+                            @switch (certificado.status) {
+                            @case ('Gerado') {
                             <span
                                 class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700">
                                 <span class="h-1.5 w-1.5 rounded-full bg-emerald-600"></span>
                                 Gerado
                             </span>
-                            } @else {
+                            }
+
+                            @case ('Falha') {
                             <span
                                 class="inline-flex items-center gap-2 rounded-full bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-700">
                                 <span class="h-1.5 w-1.5 rounded-full bg-red-600"></span>
                                 Falha
                             </span>
+                            }
+
+                            @default {
+                            <span
+                                class="inline-flex rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-700">
+                                {{ certificado.status }}
+                            </span>
+                            }
                             }
                         </td>
 
@@ -293,8 +379,7 @@
         </div>
 
         } @else {
-
-        <!-- Estado vazio -->
+        <!-- Nenhum certificado -->
         <div class="flex flex-col items-center justify-center px-6 py-16 text-center">
 
             <div class="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#F5F0E5] text-[#8B7547]">
@@ -305,6 +390,20 @@
                 </svg>
             </div>
 
+            @if (
+            statusSolicitacao()?.status === 'Pendente' ||
+            statusSolicitacao()?.status === 'GerandoCertificados' ||
+            statusSolicitacao()?.status === 'GerandoZip'
+            ) {
+            <h3 class="text-base font-semibold text-[#172554]">
+                Aguardando os certificados
+            </h3>
+
+            <p class="mt-2 max-w-md text-sm leading-6 text-[#647084]">
+                A solicitação está em processamento. Os documentos aparecerão
+                aqui assim que estiverem disponíveis.
+            </p>
+            } @else {
             <h3 class="text-base font-semibold text-[#172554]">
                 Nenhum certificado encontrado
             </h3>
@@ -324,6 +423,7 @@
                     <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
             </a>
+            }
 
         </div>
         }
@@ -332,7 +432,7 @@
 
     } @else if (!cursoSelecionado() && !carregandoCursos()) {
 
-    <!-- Orientação inicial -->
+    <!-- Estado inicial -->
     <section
         class="flex flex-col items-center justify-center rounded-2xl border border-[#E8E0D0] bg-white px-6 py-16 text-center shadow-sm">
 

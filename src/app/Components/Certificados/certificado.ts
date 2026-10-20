@@ -25,14 +25,14 @@ export interface StatusSolicitacaoResponse {
 }
 
 export enum StatusCertificado {
-    Gerado = 0,
-    Falha = 1
+    Gerado = 'Gerado',
+    Falha = 'Falha'
 }
 
 export enum StatusProcessamento {
-    Pendente = 0,
-    GerandoCertificados = 1,
-    GerandoZip = 2,
-    Concluido = 3,
-    Falha = 4
+    Pendente = 'Pendente',
+    GerandoCertificados = 'GerandoCertificados',
+    GerandoZip = 'GerandoZip',
+    Concluido = 'Concluido',
+    Falha = 'Falha'
 }
